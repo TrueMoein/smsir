@@ -1,0 +1,24 @@
+{
+    "name": "phplusir/smsir",
+    "description": "Offical Sms.ir Laravel Package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "moein.alizadeh",
+            "email": "moein.alizade@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "phplusir\\smsir\\": "src"
+        },
+        "files": [
+            "src/smsir-helper.php"
+        ]
+    },
+    "require": {
+        "guzzlehttp/guzzle": "~6.0",
+        "zendframework/zend-diactoros" : "1.4.*",
+        "symfony/psr-http-message-bridge" : "1.0.*"
+    }
+}
