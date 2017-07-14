@@ -14,18 +14,26 @@ How to install:
     php artisan vendor:publish
 
 > **Setup:**
+
 > After publish the package files you must open smsir.php in config folder and set the api-key, secret-key and your sms line number.
 > 
+
 > **Like this:**
+
 	'api-key' => env('SMSIR-API-KEY','Your sms.ir api key'),
 	'secret-key' => env('SMSIR-SECRET-KEY','Your sms.ir secret key'),
 	'line-number' => env('SMSIR-LINE-NUMBER','Your sms.ir line number'
 > 
 > Note:
+
 you can set the keys and number in your .env file
+
 > **like this:**
+
 > SMSIR-API-KEY=your api-key
+
 > SMSIR-SECRET-KEY=your secret-key
+
 > SMSIR-LINE-NUMBER=1000465******
 
 
