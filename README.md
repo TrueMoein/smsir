@@ -33,7 +33,7 @@ and add this line to your app.php aliases:
 > 
 > Note:
 
-you can set the keys and number in your .env file
+you can set the keys and line number in your .env file
 
 > **like this:**
 
