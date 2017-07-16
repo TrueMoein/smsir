@@ -13,7 +13,7 @@ return [
 	// Your sms.ir line number
 	'line-number' => env('SMSIR-LINE-NUMBER','Your Sms.ir Line Number'),
 	// ======================================================================
-	
+
 	// set true if you want log to the database
 	'db-log' => true,
 
