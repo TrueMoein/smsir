@@ -11,22 +11,27 @@ class SmsirServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
     public function boot()
     {
+    	// the main router
 	    $this->loadRoutesFrom(__DIR__.'/routes.php');
+	    // the main views folder
 	    $this->loadViewsFrom(__DIR__.'/views', 'smsir');
+	    // the main migration folder for create smsir tables
 	    $this->loadMigrationsFrom(__DIR__.'/migrations');
 
-
-
+	    // for publish the views into main app
 	    $this->publishes([
 		    __DIR__.'/views' => resource_path('views/vendor/smsir'),
 	    ]);
 
+	    // for publish the assets files into main app
 	    $this->publishes([
 		    __DIR__.'/assets' => public_path('vendor/smsir'),
 	    ], 'public');
 
+	    // for publish the smsir config file to the main app config folder
 	    $this->publishes([
 		    __DIR__.'/config/smsir.php' => config_path('smsir.php'),
 	    ]);
@@ -39,8 +44,14 @@ class SmsirServiceProvider extends ServiceProvider
      */
     public function register()
     {
+    	// set the main config file
 	    $this->mergeConfigFrom(
 		    __DIR__.'/config/smsir.php', 'smsir'
 	    );
+
+		// bind the Smsir Facade
+	    $this->app->bind('Smsir', function () {
+		    return new Smsir;
+	    });
     }
 }
