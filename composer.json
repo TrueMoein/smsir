@@ -11,10 +11,7 @@
     "autoload": {
         "psr-4": {
             "phplusir\\smsir\\": "src"
-        },
-        "files": [
-            "src/smsir-helper.php"
-        ]
+        }
     },
     "require": {
         "guzzlehttp/guzzle": "~6.0",
