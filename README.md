@@ -12,7 +12,7 @@ Hi, if you have an account in sms.ir, you can use this package for laravel
 How to install:
 -------------
 
-    composer require phplusir/smsir dev-master
+    composer require phplusir/smsir
     php artisan vendor:publish
 
 > **Setup:**
