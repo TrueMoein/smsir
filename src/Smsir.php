@@ -27,7 +27,6 @@ class Smsir
 	{
 		$client     = new Client();
 		$result     = $client->get('http://ws.sms.ir/api/credit',['headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
-
 		return json_decode($result->getBody(),true)['Credit'];
 	}
 
@@ -50,6 +49,18 @@ class Smsir
 			$body = ['Messages'=>$messages,'MobileNumbers'=>$numbers,'LineNumber'=>config('smsir.line-number'),'SendDateTime'=>$sendDateTime];
 		}
 		$result     = $client->post('http://ws.sms.ir/api/MessageSend',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		if(config('smsir.db-log')) {
+			$res = json_decode($result->getBody()->getContents(),true);
+			foreach ( array_combine( $messages, $numbers ) as $message => $number ) {
+				SmsirLogs::create( [
+					'response' => $res['Message'],
+					'message'  => $message,
+					'status'   => $res['IsSuccessful'],
+					'from'     => 'باشگاه مشتریان',
+					'to'       => $number,
+				] );
+			}
+		}
 		return $result->getBody()->getContents();
 	}
 
@@ -71,6 +82,16 @@ class Smsir
 		$client     = new Client();
 		$body = ['Prefix'=>$prefix,'FirstName'=>$firstName,'LastName'=>$lastName,'Mobile'=>$mobile,'BirthDay'=>$birthDay,'CategoryId'=>$categotyId];
 		$result     = $client->post('http://ws.sms.ir/api/CustomerClubContact',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		$res = json_decode($result->getBody()->getContents(),true);
+		if(config('smsir.db-log')){
+			SmsirLogs::create([
+				'response'  => $res['Message'],
+				'message'   => "افزودن $firstName $lastName به مخاطبین باشگاه ",
+				'status'    => $res['IsSuccessful'],
+				'from'      => 'باشگاه مشتریان',
+				'to'        => $mobile,
+			]);
+		}
 		return $result->getBody()->getContents();
 	}
 
@@ -91,6 +112,18 @@ class Smsir
 			$body   = ['Messages'=>$messages,'MobileNumbers'=>$numbers,'CanContinueInCaseOfError'=>$canContinueInCaseOfError];
 		}
 		$result = $client->post('http://ws.sms.ir/api/CustomerClub/Send',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		if(config('smsir.db-log')){
+			$res = json_decode($result->getBody()->getContents(),true);
+			foreach (array_combine($messages, $numbers) as $message => $number) {
+				SmsirLogs::create([
+					'response'  => $res['Message'],
+					'message'   => $message,
+					'status'    => $res['IsSuccessful'],
+					'from'      => 'باشگاه مشتریان',
+					'to'        => $number,
+				]);
+			}
+		}
 		return $result->getBody()->getContents();
 	}
 
@@ -110,6 +143,16 @@ class Smsir
 		$client = new Client();
 		$body   = ['Prefix'=>$prefix,'FirstName'=>$firstName,'LastName'=>$lastName,'Mobile'=>$mobile,'BirthDay'=>$birthDay,'CategoryId'=>$categotyId,'MessageText'=>$message];
 		$result = $client->post('http://ws.sms.ir/api/CustomerClub/AddContactAndSend',['json'=>[$body],'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		if(config('smsir.db-log')){
+			$res = json_decode($result->getBody()->getContents(),true);
+			SmsirLogs::create([
+				'response'  => $res['Message'],
+				'message'   => $message,
+				'status'    => $res['IsSuccessful'],
+				'from'      => 'باشگاه مشتریان',
+				'to'        => $mobile,
+			]);
+		}
 		return $result->getBody()->getContents();
 	}
 
@@ -125,6 +168,16 @@ class Smsir
 		$client = new Client();
 		$body   = ['Code'=>$code,'MobileNumber'=>$number];
 		$result = $client->post('http://ws.sms.ir/api/VerificationCode',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		if(config('smsir.db-log')){
+			$res = json_decode($result->getBody()->getContents(),true);
+			SmsirLogs::create([
+				'response'  => $res['Message'],
+				'message'   => $code,
+				'status'    => $res['IsSuccessful'],
+				'from'      => 'باشگاه مشتریان',
+				'to'        => $number,
+			]);
+		}
 		return $result->getBody()->getContents();
 	}
 }
