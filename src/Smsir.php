@@ -56,7 +56,7 @@ class Smsir
 					'response' => $res['Message'],
 					'message'  => $message,
 					'status'   => $res['IsSuccessful'],
-					'from'     => 'باشگاه مشتریان',
+					'from'     => config('smsir.line-number'),
 					'to'       => $number,
 				] );
 			}
