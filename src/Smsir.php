@@ -13,7 +13,7 @@ class Smsir
 	public static function getToken()
 	{
 		$client     = new Client();
-		$body       = ['UserApiKey'=>config('smsir.api-key'),'SecretKey'=>config('smsir.secret-key')];
+		$body       = ['UserApiKey'=>config('smsir.api-key'),'SecretKey'=>config('smsir.secret-key'),'System'=>'laravel_v_1_1'];
 		$result     = $client->post('http://ws.sms.ir/api/Token',['json'=>$body]);
 		return json_decode($result->getBody(),true)['TokenKey'];
 	}
