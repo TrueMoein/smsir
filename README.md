@@ -1,7 +1,7 @@
 Official Laravel Package for Sms.ir
 ===================
 
-<a href="https://www.sms.ir/%D8%AE%D8%AF%D9%85%D8%A7%D8%AA/%D9%88%D8%A8-%D8%B3%D8%B1%D9%88%DB%8C%D8%B3/%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D9%BE%DB%8C%D8%A7%D9%85%DA%A9-laravel/">آموزش نصب و استفاده از این پکیج به زبان فارسی</a>
+<a style="text-align:center" href="https://www.sms.ir/%D8%AE%D8%AF%D9%85%D8%A7%D8%AA/%D9%88%D8%A8-%D8%B3%D8%B1%D9%88%DB%8C%D8%B3/%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D9%BE%DB%8C%D8%A7%D9%85%DA%A9-laravel/">آموزش نصب و استفاده از این پکیج به زبان فارسی</a>
 
 Hi, if you have an account in sms.ir, you can use this package for laravel
 
