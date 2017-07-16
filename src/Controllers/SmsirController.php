@@ -1,37 +1,25 @@
 <?php
 
 namespace phplusir\smsir\Controllers;
-
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Route;
 use phplusir\smsir\Smsir;
+use phplusir\smsir\SmsirLogs;
 
 class SmsirController extends Controller
 {
-	public function index()
-	{
+
+	// the main index page for administrators
+	public function index() {
 		$credit = Smsir::credit();
-		return view('smsir::index',compact('credit'));
+		$smsir_logs = SmsirLogs::paginate(config('smsir.in-page'));
+		return view('smsir::index',compact('credit','smsir_logs'));
 	}
 
-	public function send()
-	{
-		$numbers = ['09301240100'];
-		Smsir::send(['تست ارسال علیزاده'],$numbers);
+	// administrators can delete single log
+	public function delete() {
+		SmsirLogs::where('id',Route::current()->parameters['log'])->delete();
+		// return the user back to sms-admin after delete the log
+		return back();
 	}
-
-	public function addToCustomer() {
-		$send = Smsir::addContactAndSend('آقای','معین','علیزاده','09301240100','این تست برای بخش دوم');
-		var_dump($send);
-	}
-
-	public function sendCC() {
-		Smsir::sendToCustomerClub(['سلام'],['09301240100']);
-	}
-
-	public function verf() {
-		$verf = Smsir::sendVerification('1290839','09301240100');
-		var_dump($verf);
-	}
-
-
 }
