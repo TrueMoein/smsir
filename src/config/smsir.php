@@ -5,7 +5,10 @@ return [
 	/* Important Settings */
 
 	// ======================================================================
-	'middleware' => ['guest'],
+	// never remove 'web', . just put your middleware like auth or admin (if you have) here. eg: ['web','auth']
+	'middlewares' => ['web'],
+	// you can change default route from sms-admin to anything you want
+	'route' => 'sms-admin',
 	// SMS.ir Api Key
 	'api-key' => env('SMSIR-API-KEY','Your api key'),
 	// SMS.ir Secret Key
