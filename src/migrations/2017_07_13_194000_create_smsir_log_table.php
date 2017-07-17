@@ -18,6 +18,8 @@ class CreateSmsirLogTable extends Migration
 			$table->string('from',20)->nullable();
 			$table->string('to',20)->nullable();
 			$table->string('message',500)->nullable();
+			$table->boolean('status')->nullable();
+			$table->string('response',500)->nullable();
 			$table->timestamps();
 		});
 	}
