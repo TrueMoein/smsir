@@ -1,5 +1,11 @@
+<p align="center"><img src="https://www.sms.ir/wp-content/themes/sms.ir/assets/img/final-sms-logo.png"></p>
+
 Official Laravel Package for sms.ir
 ===================
+[![Latest Stable Version](https://poser.pugx.org/phplusir/smsir/v/stable)](https://packagist.org/packages/phplusir/smsir)
+[![Total Downloads](https://poser.pugx.org/phplusir/smsir/downloads)](https://packagist.org/packages/phplusir/smsir)
+[![Monthly Downloads](https://poser.pugx.org/phplusir/smsir/d/monthly)](https://packagist.org/packages/phplusir/smsir)
+[![License](https://poser.pugx.org/phplusir/smsir/license)](https://packagist.org/packages/phplusir/smsir)
 ----------
 <a href="https://www.sms.ir/%D8%AE%D8%AF%D9%85%D8%A7%D8%AA/%D9%88%D8%A8-%D8%B3%D8%B1%D9%88%DB%8C%D8%B3/%D8%A7%D8%B1%D8%B3%D8%A7%D9%84-%D9%BE%DB%8C%D8%A7%D9%85%DA%A9-laravel/">آموزش فارسی نصب و استفاده از پیکیج ارسال پیامک لاراول</a>
 ----------
