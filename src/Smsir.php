@@ -14,7 +14,7 @@ class Smsir
 	{
 		$client     = new Client();
 		$body       = ['UserApiKey'=>config('smsir.api-key'),'SecretKey'=>config('smsir.secret-key'),'System'=>'laravel_v_1_4'];
-		$result     = $client->post('http://ws.sms.ir/api/Token',['json'=>$body]);
+		$result     = $client->post('http://restfulsms.com/api/Token',['json'=>$body,'connect_timeout'=>30]);
 		return json_decode($result->getBody(),true)['TokenKey'];
 	}
 
@@ -26,7 +26,7 @@ class Smsir
 	public static function credit()
 	{
 		$client     = new Client();
-		$result     = $client->get('http://ws.sms.ir/api/credit',['headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		$result     = $client->get('http://restfulsms.com/api/credit',['headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
 		return json_decode($result->getBody(),true)['Credit'];
 	}
 
@@ -48,7 +48,7 @@ class Smsir
 		} else {
 			$body = ['Messages'=>$messages,'MobileNumbers'=>$numbers,'LineNumber'=>config('smsir.line-number'),'SendDateTime'=>$sendDateTime];
 		}
-		$result     = $client->post('http://ws.sms.ir/api/MessageSend',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		$result     = $client->post('http://restfulsms.com/api/MessageSend',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
 		if(config('smsir.db-log')) {
 			$res = json_decode($result->getBody()->getContents(),true);
 			foreach ( array_combine( $messages, $numbers ) as $message => $number ) {
@@ -81,7 +81,7 @@ class Smsir
 	{
 		$client     = new Client();
 		$body = ['Prefix'=>$prefix,'FirstName'=>$firstName,'LastName'=>$lastName,'Mobile'=>$mobile,'BirthDay'=>$birthDay,'CategoryId'=>$categotyId];
-		$result     = $client->post('http://ws.sms.ir/api/CustomerClubContact',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		$result     = $client->post('http://restfulsms.com/api/CustomerClubContact',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
 		$res = json_decode($result->getBody()->getContents(),true);
 		if(config('smsir.db-log')){
 			SmsirLogs::create([
@@ -111,7 +111,7 @@ class Smsir
 		} else {
 			$body   = ['Messages'=>$messages,'MobileNumbers'=>$numbers,'CanContinueInCaseOfError'=>$canContinueInCaseOfError];
 		}
-		$result = $client->post('http://ws.sms.ir/api/CustomerClub/Send',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		$result = $client->post('http://restfulsms.com/api/CustomerClub/Send',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
 		if(config('smsir.db-log')){
 			$res = json_decode($result->getBody()->getContents(),true);
 			foreach (array_combine($messages, $numbers) as $message => $number) {
@@ -142,7 +142,7 @@ class Smsir
 	{
 		$client = new Client();
 		$body   = ['Prefix'=>$prefix,'FirstName'=>$firstName,'LastName'=>$lastName,'Mobile'=>$mobile,'BirthDay'=>$birthDay,'CategoryId'=>$categotyId,'MessageText'=>$message];
-		$result = $client->post('http://ws.sms.ir/api/CustomerClub/AddContactAndSend',['json'=>[$body],'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		$result = $client->post('http://restfulsms.com/api/CustomerClub/AddContactAndSend',['json'=>[$body],'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
 		if(config('smsir.db-log')){
 			$res = json_decode($result->getBody()->getContents(),true);
 			SmsirLogs::create([
@@ -167,7 +167,7 @@ class Smsir
 	{
 		$client = new Client();
 		$body   = ['Code'=>$code,'MobileNumber'=>$number];
-		$result = $client->post('http://ws.sms.ir/api/VerificationCode',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()]]);
+		$result = $client->post('http://restfulsms.com/api/VerificationCode',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
 		if(config('smsir.db-log')){
 			$res = json_decode($result->getBody()->getContents(),true);
 			SmsirLogs::create([

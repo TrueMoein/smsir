@@ -1,6 +1,6 @@
 {
     "name": "phplusir/smsir",
-    "description": "Offical Sms.ir Laravel Package",
+    "description": "Official Sms.ir Laravel Package",
     "keywords": ["laravel", "sms", "پیامک", "اس ام اس", "sendsms", "notifacation", "sms.ir"],
     "license": "MIT",
     "authors": [
