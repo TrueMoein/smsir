@@ -6,13 +6,14 @@ use Illuminate\Support\Facades\Route;
 use phplusir\smsir\Smsir;
 use phplusir\smsir\SmsirLogs;
 
+
 class SmsirController extends Controller
 {
 
 	// the main index page for administrators
 	public function index() {
 		$credit = Smsir::credit();
-		$smsir_logs = SmsirLogs::paginate(config('smsir.in-page'));
+		$smsir_logs = SmsirLogs::orderBy('id','DESC')->paginate(config('smsir.in-page'));
 		return view('smsir::index',compact('credit','smsir_logs'));
 	}
 

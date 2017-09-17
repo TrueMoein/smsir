@@ -51,14 +51,26 @@ class Smsir
 		$result     = $client->post('http://restfulsms.com/api/MessageSend',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
 		if(config('smsir.db-log')) {
 			$res = json_decode($result->getBody()->getContents(),true);
-			foreach ( array_combine( $messages, $numbers ) as $message => $number ) {
-				SmsirLogs::create( [
-					'response' => $res['Message'],
-					'message'  => $message,
-					'status'   => $res['IsSuccessful'],
-					'from'     => config('smsir.line-number'),
-					'to'       => $number,
-				] );
+			if(count($messages) === 1) {
+				foreach ( $numbers as $number ) {
+					SmsirLogs::create( [
+						'response' => $res['Message'],
+						'message'  => $messages[0],
+						'status'   => $res['IsSuccessful'],
+						'from'     => config('smsir.line-number'),
+						'to'       => $number,
+					] );
+				}
+			} else {
+				foreach ( array_combine( $messages, $numbers ) as $message => $number ) {
+					SmsirLogs::create( [
+						'response' => $res['Message'],
+						'message'  => $message,
+						'status'   => $res['IsSuccessful'],
+						'from'     => config('smsir.line-number'),
+						'to'       => $number,
+					] );
+				}
 			}
 		}
 		return $result->getBody()->getContents();
@@ -114,14 +126,26 @@ class Smsir
 		$result = $client->post('http://restfulsms.com/api/CustomerClub/Send',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
 		if(config('smsir.db-log')){
 			$res = json_decode($result->getBody()->getContents(),true);
-			foreach (array_combine($messages, $numbers) as $message => $number) {
-				SmsirLogs::create([
-					'response'  => $res['Message'],
-					'message'   => $message,
-					'status'    => $res['IsSuccessful'],
-					'from'      => 'باشگاه مشتریان',
-					'to'        => $number,
-				]);
+			if(count($messages) === 1) {
+				foreach ( $numbers as $number ) {
+					SmsirLogs::create( [
+						'response' => $res['Message'],
+						'message'  => $messages[0],
+						'status'   => $res['IsSuccessful'],
+						'from'     => config('smsir.line-number'),
+						'to'       => $number,
+					] );
+				}
+			} else {
+				foreach ( array_combine( $messages, $numbers ) as $message => $number ) {
+					SmsirLogs::create( [
+						'response' => $res['Message'],
+						'message'  => $message,
+						'status'   => $res['IsSuccessful'],
+						'from'     => config('smsir.line-number'),
+						'to'       => $number,
+					] );
+				}
 			}
 		}
 		return $result->getBody()->getContents();
