@@ -15,16 +15,19 @@ class SmsirServiceProvider extends ServiceProvider
     public function boot()
     {
     	// the main router
-	    include __DIR__.'/routes.php';
+	    include_once __DIR__.'/routes.php';
 	    // the main views folder
 	    $this->loadViewsFrom(__DIR__.'/views', 'smsir');
 	    // the main migration folder for create smsir tables
-	    $this->loadMigrationsFrom(__DIR__.'/migrations');
 
 	    // for publish the views into main app
 	    $this->publishes([
 		    __DIR__.'/views' => resource_path('views/vendor/smsir'),
 	    ]);
+
+	    $this->publishes([
+		    __DIR__.'/migrations/' => database_path('migrations')
+	    ], 'migrations');
 
 	    // for publish the assets files into main app
 	    $this->publishes([
