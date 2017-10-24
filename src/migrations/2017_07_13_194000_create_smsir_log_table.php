@@ -15,8 +15,8 @@ class CreateSmsirLogTable extends Migration
 	{
 		Schema::create('smsir_logs', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('from',20)->nullable();
-			$table->string('to',20)->nullable();
+			$table->string('from',100)->nullable();
+			$table->string('to',100)->nullable();
 			$table->string('message',500)->nullable();
 			$table->boolean('status')->nullable();
 			$table->string('response',500)->nullable();
