@@ -92,7 +92,7 @@ class Smsir
 
 		self::DBlog($result,$messages,$numbers);
 
-		return json_decode($result->getBody());
+		return json_decode($result->getBody(),true);
 	}
 
 	/**
@@ -116,7 +116,7 @@ class Smsir
 
 		self::DBlog($res,"افزودن $firstName $lastName به مخاطبین باشگاه ",$mobile);
 
-		return json_decode($result->getBody());
+		return json_decode($result->getBody(),true);
 	}
 
 	/**
@@ -141,7 +141,7 @@ class Smsir
 
 		self::DBlog($result,$messages,$numbers);
 
-		return json_decode($result->getBody());
+		return json_decode($result->getBody(),true);
 
 	}
 
@@ -164,23 +164,26 @@ class Smsir
 
 		self::DBlog($result,$message,$mobile);
 
-		return json_decode($result->getBody());
+		return json_decode($result->getBody(),true);
 	}
 
 	/**
 	 * @param $code
 	 * @param $number
 	 *
+	 * @param bool $log
+	 *
 	 * @return mixed
 	 */
-	public static function sendVerification($code,$number)
+	public static function sendVerification($code,$number,$log = false)
 	{
 		$client = new Client();
 		$body   = ['Code'=>$code,'MobileNumber'=>$number];
 		$result = $client->post('http://restfulsms.com/api/VerificationCode',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
-
-		self::DBlog($result,$code,$number);
-		return json_decode($result->getBody());
+		if($log) {
+			self::DBlog($result,$code,$number);
+		}
+		return json_decode($result->getBody(),true);
 	}
 
 	/**
