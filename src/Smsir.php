@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 class Smsir
 {
 	/**
-	 * This method used for log the messages to the database if db-log set to true.
+	 * This method used for log the messages to the database if db-log set to true (@ smsir.php in config folder).
 	 *
 	 * @param $result
 	 * @param $messages
@@ -45,7 +45,7 @@ class Smsir
 	}
 
 	/**
-	 * this method use in every request to get the token at first.
+	 * this method used in every request to get the token at first.
 	 *
 	 * @return mixed - the Token for use api
 	 */
@@ -58,7 +58,7 @@ class Smsir
 	}
 
 	/**
-	 * this method return your credit in sms.ir
+	 * this method return your credit in sms.ir (sms credit, not money)
 	 *
 	 * @return mixed - credit
 	 */
@@ -70,13 +70,25 @@ class Smsir
 	}
 
 	/**
+	 * by this method you can fetch all of your sms lines.
+	 *
+	 * @return mixed , return all of your sms lines
+	 */
+	public static function getLines()
+	{
+		$client     = new Client();
+		$result     = $client->get('http://restfulsms.com/api/SMSLine',['headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
+		return json_decode($result->getBody(),true);
+	}
+
+	/**
 	 * Simple send message with sms.ir account and line number
 	 *
 	 * @param $messages = Messages - Count must be equal with $numbers
 	 * @param $numbers  = Numbers - must be equal with $messages
 	 * @param null $sendDateTime = dont fill it if you want to send message now
 	 *
-	 * @return mixed
+	 * @return mixed, return status
 	 */
 	public static function send($messages,$numbers,$sendDateTime = null)
 	{
@@ -120,6 +132,8 @@ class Smsir
 	}
 
 	/**
+	 * this method send message to your customer club contacts (known as white sms module)
+	 *
 	 * @param $messages
 	 * @param $numbers
 	 * @param null $sendDateTime
@@ -146,6 +160,8 @@ class Smsir
 	}
 
 	/**
+	 * this method add contact to the your customer club and then send a message to him/her
+	 *
 	 * @param $prefix
 	 * @param $firstName
 	 * @param $lastName
@@ -168,6 +184,8 @@ class Smsir
 	}
 
 	/**
+	 * this method send a verification code to your customer. need active the module at panel first.
+	 *
 	 * @param $code
 	 * @param $number
 	 *
@@ -187,6 +205,8 @@ class Smsir
 	}
 
 	/**
+	 * this method used for fetch received messages
+	 *
 	 * @param $perPage
 	 * @param $pageNumber
 	 * @param $formDate
@@ -203,10 +223,12 @@ class Smsir
 	}
 
 	/**
-	 * @param $perPage
-	 * @param $pageNumber
-	 * @param $formDate
-	 * @param $toDate
+	 * this method used for fetch your sent messages
+	 *
+	 * @param $perPage = how many sms you want to fetch in every page
+	 * @param $pageNumber = the page number
+	 * @param $formDate = from date
+	 * @param $toDate = to date
 	 *
 	 * @return mixed
 	 */
