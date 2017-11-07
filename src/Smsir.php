@@ -205,6 +205,24 @@ class Smsir
 	}
 
 	/**
+	 * @param array $parameters = all parameters and parameters value as an array
+	 * @param $template_id = you must create a template in sms.ir and put your template id here
+	 * @param $number = phone number
+	 * @return mixed = the result
+	 */
+	public static function ultraFastSend(array $parameters, $template_id, $number) {
+		$params = [];
+		foreach ($parameters as $key => $value) {
+			$params[] = ['Parameter' => $key, 'ParameterValue' => $value];
+		}
+		$client = new Client();
+		$body   = ['ParameterArray' => $params,'TemplateId' => $template_id,'Mobile' => $number];
+		$result = $client->post('http://restfulsms.com/api/UltraFastSend',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
+
+		return json_decode($result->getBody(),true);
+	}
+
+	/**
 	 * this method used for fetch received messages
 	 *
 	 * @param $perPage
