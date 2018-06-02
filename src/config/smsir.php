@@ -5,7 +5,6 @@ return [
 	/* Important Settings */
 
 	// ======================================================================
-
 	// never remove 'web', just put your middleware like auth or admin (if you have) here. eg: ['web','auth']
 	'middlewares' => ['web'],
 	// you can change default route from sms-admin to anything you want
@@ -17,7 +16,6 @@ return [
 	// Your sms.ir line number
 	'line-number' => env('SMSIR-LINE-NUMBER','Your Sms.ir Line Number'),
 	// ======================================================================
-
 	// set true if you want log to the database
 	'db-log' => true,
 	// if you don't want to include admin panel routes set this to false

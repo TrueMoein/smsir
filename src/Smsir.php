@@ -40,7 +40,6 @@ class Smsir
 					]);
 				}
 			}
-			return var_dump($res);
 		}
 	}
 
@@ -86,7 +85,7 @@ class Smsir
 	 *
 	 * @param $messages = Messages - Count must be equal with $numbers
 	 * @param $numbers  = Numbers - must be equal with $messages
-	 * @param null $sendDateTime = dont fill it if you want to send message now
+	 * @param null $sendDateTime = don't fill it if you want to send message now
 	 *
 	 * @return mixed, return status
 	 */
