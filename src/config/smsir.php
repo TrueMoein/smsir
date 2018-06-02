@@ -5,7 +5,7 @@ return [
 	/* Important Settings */
 
 	// ======================================================================
-	// never remove 'web', . just put your middleware like auth or admin (if you have) here. eg: ['web','auth']
+	// never remove 'web', just put your middleware like auth or admin (if you have) here. eg: ['web','auth']
 	'middlewares' => ['web'],
 	// you can change default route from sms-admin to anything you want
 	'route' => 'sms-admin',
