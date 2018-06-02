@@ -5,6 +5,8 @@ return [
 	/* Important Settings */
 
 	// ======================================================================
+    // if you don't want to include admin panel routes set this to false
+    'panel-routes' => true,
 	// never remove 'web', . just put your middleware like auth or admin (if you have) here. eg: ['web','auth']
 	'middlewares' => ['web'],
 	// you can change default route from sms-admin to anything you want
