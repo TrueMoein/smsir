@@ -256,4 +256,21 @@ class Smsir
 
 		return json_decode($result->getBody()->getContents())->Messages;
 	}
+
+
+	/**
+	 * @param $mobile = The mobile number of that user who you wanna to delete it
+	 *
+	 * @return mixed = the result
+	 */
+	public static function deleteContact($mobile) {
+		$client = new Client();
+		$body   = ['Mobile' => $mobile, 'CanContinueInCaseOfError' => false];
+		$result = $client->post('http://restfulsms.com/api/UltraFastSend',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>self::getToken()],'connect_timeout'=>30]);
+
+		return json_decode($result->getBody(),true);
+	}
+
+
+
 }
